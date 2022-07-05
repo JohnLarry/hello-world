@@ -25,7 +25,7 @@ jobs:
       - run:
           name: "Print hello"
           command: "echo Hello"
-  print_world:
+  print-world:
     docker:
       - image: cicleci/node:13.8.0
     steps:

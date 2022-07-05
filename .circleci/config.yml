@@ -33,6 +33,8 @@ jobs:
           name: "Say World"
           command:  "echo World!"
   print-var:
+    docker:
+      - image: cimg/base:stable
 
     steps:
       - run:

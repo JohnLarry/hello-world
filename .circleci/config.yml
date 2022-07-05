@@ -32,6 +32,9 @@ jobs:
       - run:
           name: "Say World"
           command:  "echo World!"
+  print-var:
+
+    steps:
       - run:
           name: "Env var"
           command:  echo $name
@@ -47,3 +50,4 @@ workflows:
       - print-hello
       - print-world:
           requires: [print-hello]
+      - print-var

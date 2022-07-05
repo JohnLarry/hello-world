@@ -32,6 +32,9 @@ jobs:
       - run:
           name: "Say World"
           command:  "echo World!"
+      - run:
+          name: "Env var"
+          command:  echo $name
 
 
 

@@ -16,7 +16,7 @@ jobs:
       - checkout
       - run:
           name: "input file"
-            command: echo "Hello world!" > hello.txt
+          command: echo "Hello world!" > hello.txt
 
 
           - persist_to_workplace:

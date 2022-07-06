@@ -19,14 +19,15 @@ jobs:
             - output.txt
 
   print_output_file:
-    docker: &doc
+    docker:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
           at: ~/
       - run: cat ~/output.txt
   print_pipeline:
-    *doc
+    docker:
+      - image: circleci/node:13.8.0
     steps:
       - print_pipeline_id:
             id: << pipeline.id >>

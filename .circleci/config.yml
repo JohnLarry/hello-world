@@ -15,7 +15,8 @@ jobs:
     steps:
       - checkout
       - run:
-          command: echo "Hello world!"> hello.txt
+          name: "input file"
+            command: echo "Hello world!" > hello.txt
 
 
           - persist_to_workplace:
@@ -26,8 +27,11 @@ jobs:
       - image: cimg/base:stable
     steps:
 
+      - checkout
+
       
       - run:
+          name: "output"
 
           command: cat hello.txt
 

@@ -5,7 +5,7 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  say-hello:
+  save_hello_world_output:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
@@ -15,31 +15,46 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-  print-hello:
+          name: "Save hello world output"
+          command: echo "Hello world!" > workspace/hello.txt
 
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run:
-          name: "Print hello"
-          command: "echo Hello"
-  print-world:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - run:
-          name: "Say World"
-          command:  "echo World!"
-  print-var:
+
+          - persist_to_workplace:
+              root: workspace
+  show_hello_output:
     docker:
       - image: cimg/base:stable
-
     steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      
       - run:
-          name: "Env var"
-          command:  echo $name
+          name: "show hello world output"
+          command: cat workspace/hello.txt
+
+  #print-hello:
+
+    #docker:
+      #- image: circleci/node:13.8.0
+    #steps:
+      #- run:
+          #name: "Print hello"
+          #command: "echo Hello"
+  #print-world:
+    #docker:
+      #- image: circleci/node:13.8.0
+    #steps:
+      #- run:
+          #name: "Say World"
+          #command:  "echo World!"
+  #print-var:
+    #docker:
+      #- image: cimg/base:stable
+
+    #steps:
+      #- run:
+          #name: "Env var"
+          #command:  echo $name
 
 
 
@@ -48,8 +63,9 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
-      - say-hello
-      - print-hello
-      - print-world:
-          requires: [print-hello]
-      - print-var
+
+      - save_hello_world_output
+      - show_hello_world_output:
+          reguires:
+            - save_hello_world_output
+

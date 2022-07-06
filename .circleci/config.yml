@@ -69,6 +69,6 @@ workflows:
 
       - save_hello_world_output
       - show_hello_world_output:
-          reguires:
+          requires:
             - save_hello_world_output
 

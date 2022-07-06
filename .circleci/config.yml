@@ -19,7 +19,7 @@ jobs:
           command: echo "Hello world!" > hello.txt
 
 
-      - persist_to_workplace:
+      - persist_to_worksplace:
           hello.txt
 
   show_hello_output:

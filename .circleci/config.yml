@@ -15,22 +15,21 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Save hello world output"
-          command: echo "Hello world!" > workspace/hello.txt
+          command: echo "Hello world!"> hello.txt
 
 
           - persist_to_workplace:
-              root: workspace
+              hello.txt
+
   show_hello_output:
     docker:
       - image: cimg/base:stable
     steps:
-      - attach_workspace:
-          at: /tmp/workspace
+
       
       - run:
-          name: "show hello world output"
-          command: cat workspace/hello.txt
+
+          command: cat hello.txt
 
   #print-hello:
 

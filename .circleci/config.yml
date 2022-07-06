@@ -1,5 +1,12 @@
 version: 2.1
 
+commands:
+  print_pipeline_id:
+    parameters:
+      id:
+        type: string
+    steps:
+      - run: echo << parameters.id >>
 jobs:
   save_hello_world_output:
     docker:
@@ -18,12 +25,11 @@ jobs:
       - attach_workspace:
           at: ~/
       - run: cat ~/output.txt
-  print_pipeline_id:
+  print_pipeline:
     *doc
     steps:
-      command: 
-        -name: "Print pipeline id"
-        -run: echo $CIRCLE_WORKFLOW_ID
+      - print_pipeline_id:
+            id: << pipeline.id >>
 
 
 
@@ -34,4 +40,4 @@ workflows:
       - print_output_file:
           requires:
             - save_hello_world_output
-      - print_pipeline_id
+      - print_pipeline

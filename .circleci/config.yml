@@ -12,12 +12,20 @@ jobs:
             - output.txt
 
   print_output_file:
-    docker:
+    docker: &doc
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
           at: ~/
       - run: cat ~/output.txt
+  print_pipeline_id:
+    *doc
+    steps:
+      command: 
+        -name: "Print pipeline id"
+        -run: echo $CIRCLE_WORKFLOW_ID
+
+
 
 workflows:
   my_workflow:
@@ -26,3 +34,4 @@ workflows:
       - print_output_file:
           requires:
             - save_hello_world_output
+      - print_pipeline_id

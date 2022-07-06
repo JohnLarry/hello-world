@@ -22,7 +22,7 @@ jobs:
       - persist_to_workspace:
           hello.txt
 
-  show_hello_output:
+  show_hello_world_output:
     docker:
       - image: cimg/base:stable
     steps:
